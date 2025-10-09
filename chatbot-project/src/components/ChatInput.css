@@ -1,0 +1,49 @@
+.css-input{
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 50px;
+  background-color: white;
+
+
+
+}
+.clear-button,
+.send-button{
+  background-color:rgb(228, 228, 228) ;
+
+  font-size: 15px;
+
+  border:none;
+  border-radius: 10px;
+  height: 43px;
+  width: 94px;
+
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.send-button{
+  background-color:  #277f56;
+  color:black
+}
+.send-button{
+  cursor: pointer;
+  color: rgb(251, 251, 251);
+
+}
+.send-input{
+  font-size: 15px;
+  padding-left: 15px;
+
+  flex-grow: 1;
+    
+
+
+  border-width: 1px;
+  border-color: black;
+  border-radius: 10px;
+
+}

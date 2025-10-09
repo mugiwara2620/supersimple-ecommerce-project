@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Css and Hooks</title>
+    <style>
+      .on-button{
+        background-color: rgb(25,135,84);
+        border: none;
+        border-radius: 5px;
+        width: 55px;
+        height: 36px;
+      }
+      .off-button{
+        background-color: rgb(220,53,69);
+        border: none;
+        border-radius: 5px;
+        width: 55px;
+        height: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+      const container =document.querySelector('.js-container');
+
+      
+
+      function App(){
+        let [isButtonOn, setIsButtonOn]=React.useState(true);
+        function switsh(){
+        setIsButtonOn(!isButtonOn);
+      }
+        return (<>
+          { isButtonOn===true 
+          ?
+
+            <button
+            className="on-button"
+            onClick={switsh}
+            >
+              ON
+            </button>
+          :
+            <button
+            className="off-button"
+            onClick={switsh}
+            >
+              OFF
+            </button>
+          }
+        </>
+        )
+      };
+
+
+
+
+
+      ReactDOM.createRoot(container).render(<App />);
+      
+      
+     
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+.css-chatMessages{
+  flex-direction: column;
+  margin-bottom: 90px;
+  flex-grow:1 ;
+
+  overflow-y: scroll;
+  height: 500px;
+
+  scrollbar-width:none;
+  
+    
+  
+  width: 100%;
+  max-width: 600px;
+}

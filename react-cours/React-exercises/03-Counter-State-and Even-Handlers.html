@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>State and E.H</title>
+    <style>
+      body{
+        background-color: rgb(222,222,222);
+        /* margin-top: 0px; */
+      }
+      .div-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        
+
+
+      }
+    
+      .click-button,
+      .reset-button,
+      .auto-click-button{
+        
+        background-color: rgb(25,135,84);
+        border:none;
+        color: white;
+        padding: 7px 10px;
+        margin-right: 5px;
+        font-size: 11px;
+       
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+        const container =document.querySelector('.js-container');
+
+
+        
+				function CounterItems({items, setItems,autoClickRef,autoClickElem,bol}){
+          
+          React.useEffect(()=>{
+              console.log('lets go')
+              
+            }
+            ,[items]);
+
+            if(bol === false){
+            
+            
+
+            
+              setTimeout(()=>{
+                console.log(items);
+                
+                autoClickElem.click();
+
+
+              },1000)
+          
+              
+              
+            
+            
+          }else{
+            setItems(items);
+            console.log('stop');
+          }
+          
+        
+         
+					function addItems(){
+            
+                items+=1;
+                setItems(items);
+                
+            }
+          
+            return(
+                <>
+                   {(items===1) ? <button className='click-button' onClick={addItems}  ref={autoClickRef} >Clicked {items} time</button> : <button className='click-button' onClick={addItems}  ref={autoClickRef} >Clicked {items} times</button>}
+              </> 
+            )
+
+				}
+        function App(){
+          const autoClickRef = React.useRef(null);
+          const autoClickElem = autoClickRef.current;
+          let [bol, setbol] = React.useState(true);
+          
+
+          function autoClick(){
+            
+            setbol(!bol)
+            
+            if(!bol){
+              setItems(items+1);
+            }else{
+              setItems(items);
+            }
+            
+            
+            
+            
+          }
+          const reset=()=>{setItems(0);
+                       setbol(true);
+                    
+
+							    };
+          
+         
+
+					let [items ,setItems] = React.useState(0);
+          
+					return(
+						
+              <div className='div-container'>
+						
+							<CounterItems 
+							items={items}
+							setItems={setItems}
+              autoClickElem={autoClickElem}
+              autoClickRef={autoClickRef}
+              bol = {bol}
+
+              
+              
+              />
+              <button
+              className='reset-button'
+                onClick={ reset} 
+               
+              >
+                Reset
+              </button>
+
+              <button
+              className = 'auto-click-button'
+               onClick={autoClick}
+
+              >
+                Auto Click
+              </button>
+							
+							</div>
+						
+					)
+            
+            
+            
+            
+            
+            
+        }
+        ReactDOM.createRoot(container).render(<App />)
+      
+      
+     
+    </script>
+  </body>
+</html>

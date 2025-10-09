@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+      .js-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+       
+      }
+      .flex-box{
+        display: flex;
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items:center;
+        height: 500px;
+        
+
+        
+        font-size: 60px;
+        
+      }
+      .p-time{
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+     
+     const container = document.querySelector('.js-container');
+
+     function App(){
+      const timeRef=React.useRef(null);
+      React.useEffect(
+        ()=>{
+          const timeRefDom=timeRef.current;
+          timeRefDom.innerHTML = time;
+        },
+        [time]
+      );
+      
+      const [time,setTime] = React.useState(dayjs().format('HH:mm:ss'));
+      
+        setInterval(()=>{
+          setTime(dayjs().format('HH:mm:ss'))
+
+        },1000);
+      
+      return(
+        <div className="flex-box">
+          <div
+        className="p-time"
+        ref={timeRef}
+        >{time}
+        </div>
+        <div>
+        France
+        </div>
+        
+        </div>
+      )
+      
+     }
+
+
+
+     ReactDOM.createRoot(container).render(<App />);
+
+
+      
+      
+      
+     
+    </script>
+  </body>
+</html>

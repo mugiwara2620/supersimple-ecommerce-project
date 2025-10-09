@@ -1,0 +1,22 @@
+
+
+
+.css-App{
+  margin-top: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.welcome{
+  font-size: 18px;
+  
+  color: rgb(95, 95, 95);
+  position: absolute;
+  display: flex;
+  top: 17;
+}
+
+      
+      
+  

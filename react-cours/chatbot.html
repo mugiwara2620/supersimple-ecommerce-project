@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatBot</title>
+    <style>
+      body{
+        font-family: Arial;
+        overflow: hidden;
+
+        
+      }
+     
+      .css-App{
+        margin-top: 20px;
+            overflow: hidden;
+
+
+        
+        
+       
+        display: flex;
+        align-items: center;
+
+        
+        flex-direction: column;
+
+        
+
+        
+
+      }
+      .css-input{
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        position: fixed;
+        bottom: 0;
+        padding-bottom: 50px;
+        background-color: white;
+
+
+
+      }
+      .send-button{
+        background-color:  #277f56;
+
+        font-size: 15px;
+        color: rgb(251, 251, 251);
+
+        border:none;
+        border-radius: 10px;
+        height: 43px;
+        width: 94px;
+
+        margin-left: 10px;
+      }
+      .send-button:hover{
+        cursor: pointer;
+      }
+      .send-input{
+        font-size: 15px;
+        padding-left: 15px;
+
+        flex-grow: 1;
+         
+
+
+        border-width: 1px;
+        border-color: black;
+        border-radius: 10px;
+
+      }
+      .css-chatMessages{
+        flex-direction: column;
+        margin-bottom: 90px;
+        flex-grow:1 ;
+
+        overflow-y: scroll;
+        height: 500px;
+
+        scrollbar-width:none;
+        
+         
+        
+        width: 100%;
+        max-width: 600px;
+      }
+      .text-message{
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .css-message-text-user
+      {
+        display: flex;
+        justify-content: end;
+        gap: 10px;
+
+        
+        
+         
+
+
+      }
+      .css-message-text-robot{
+        display: flex;
+        justify-content:start;
+      }
+      .css-message-text{
+        display: flex;
+        background-color: rgb(238, 238, 238);
+        border-radius: 9px;
+        max-width: 300px;
+        padding: 15px 20px ;
+        font-size: 16px;
+        font-family: Arial;
+      }
+      .chat-message-profile{
+        width: 45px;
+      }
+      .welcome{
+        font-size: 18px;
+        
+        color: rgb(95, 95, 95);
+        position: absolute;
+        display: flex;
+        top: 17;
+      }
+      .loading-img{
+        margin: -15px;
+        width: 45px;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">    </script>
+
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+     
+    <script type="text/babel">
+      
+      const container= document.querySelector('.js-container');
+      const para=<p>Hello</p>;
+
+      function useAutoScroll(dependecies){
+        const chatMessagesRef = React.useRef(null);
+        
+        React.useEffect(()=>{
+          console.log('update');
+          const chatMessageDom=chatMessagesRef.current;
+          if (chatMessageDom){
+            console.log(chatMessageDom.scrollHeight);
+            chatMessageDom.scrollTop=chatMessageDom.scrollHeight;
+            console.log(chatMessageDom.scrollTop);
+
+            console.log(chatMessageDom);
+          }
+        },[dependecies]);
+        return(chatMessagesRef);
+      }
+
+
+      function ChatInput({chatMessages , setChatMessages}){
+        const [inputText, setInputText] = React.useState('');
+
+        function saveInputText(event){
+          setInputText(event.target.value);
+        }
+        function isLoading(){
+          let n=chatMessages.length;
+
+          console.log(chatMessages);
+
+          if (n===0){
+            return false;
+          }
+          else
+          {
+          let me = chatMessages[n-1].message || ' sd ';
+          if (me==='Loading...'){
+           return true;
+          }
+        }
+        }
+        async function sendMessage(){
+          
+          // let newChatMessages = [...chatMessages];
+          setChatMessages(
+            [...chatMessages,{
+              message:inputText,
+              sender:'user',
+              id: crypto.randomUUID()
+            },{
+              message: <div> <img className='loading-img' src="img/ChatBot/loading-spinner.gif" /> </div>,
+              sender:'robot',
+              id: crypto.randomUUID()}]
+            ) ;
+          //  await isLoading();
+         const response = await Chatbot.getResponseAsync(inputText);
+         
+          setChatMessages(
+            [...chatMessages,{
+              message:inputText,
+              sender:'user',
+              id: crypto.randomUUID()
+            },{
+              message:response ,
+              sender:'robot',
+              id: crypto.randomUUID()}]
+            ) ;
+          
+          
+          
+
+          setInputText('');
+          }
+        function keyboardEnter(event){
+          let key = event.key;
+          if (key==="Enter"){
+            if(isLoading()===true || inputText===''){
+            console.log('loading');
+            }else{
+            sendMessage();
+            
+            };
+            setInputText('');
+                 
+                  
+                
+              
+          } else if(key==="Escape"){
+            setInputText('');
+          }
+        }
+
+
+          return (
+            <div className="css-input">
+              <input 
+                className="send-input"
+                size="30" 
+                placeholder="Send a message to ChatBot"
+                onChange={saveInputText} 
+                value={inputText}
+                onKeyDown={keyboardEnter}
+              />
+              <button 
+              className="send-button"
+              onClick={
+                ()=>{
+
+                 if(isLoading()===true || inputText===''){
+                  console.log('loading');
+                  
+                  
+                 }else{
+                  sendMessage();
+                  
+                 }
+                 setInputText('');
+                  
+                
+              }
+              
+            }
+              >Send</button>
+            </div>
+          )
+      } 
+      
+      function ChatMessage({message, sender}){
+        
+        // console.log(props);
+        // const {sender}=props;
+        // const {message}=props;
+
+        // const {message, sender}=props;
+
+
+
+        /*if (sender==='user'){
+          const image="img/ChatBot/user.png";
+          return(
+          <div>
+            {message}
+            <img src={image} width="50" />
+          </div>
+          )
+        }
+          const image="img/ChatBot/robot.png";
+          */
+         
+          return(
+          <>
+            {sender==='robot' && (
+            <div class="css-message-text-robot">
+              <div class="text-message">
+                <div>
+                <img 
+                src="img/ChatBot/robot.png" 
+                className="chat-message-profile"
+                />
+                </div>
+                <div className="css-message-text">
+                  {message}
+                </div>
+              </div>
+            </div>
+            )}
+            
+            
+            {sender==='user'  && (
+              <div class="css-message-text-user">
+                <div class="text-message">
+                  <div className="css-message-text">
+                    {message}
+                  </div>
+                  <img 
+                  src="img/ChatBot/user.png" 
+                  className="chat-message-profile"
+                   />
+                </div>
+              </div>
+            )}
+            
+          </>
+          )
+
+        }
+   
+      function ChatMessages({chatMessages}){
+
+        // const chatMessagesRef = React.useRef(null);
+        
+        // React.useEffect(()=>{
+        //   console.log('update');
+        //   const chatMessageDom=chatMessagesRef.current;
+        //   if (chatMessageDom){
+        //     console.log(chatMessageDom.scrollHeight);
+        //     chatMessageDom.scrollTop=chatMessageDom.scrollHeight;
+        //     console.log(chatMessageDom.scrollTop);
+
+        //     console.log(chatMessageDom);
+        //   }
+        // },[chatMessages]);
+        const chatMessagesRef = useAutoScroll(chatMessages);
+
+        return (
+          <div 
+          className="css-chatMessages"
+          ref={chatMessagesRef}
+          >
+            {chatMessages.map((chatMessage)=>{
+                return (
+                  <ChatMessage 
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.id}
+                  />
+                )
+
+
+              })}
+          </div>
+        )
+
+      }
+
+      function App(){
+        
+        
+        const [chatMessages, setChatMessages]=React.useState(
+          []
+        );
+       
+        
+        
+
+        
+
+        // const [chatMessages, setChatMessages] = array;
+        // const chatMessages=array[0] ;
+        // const setChatMessages =array[1];
+        return (
+          <div 
+          className="css-App"
+          
+          
+          >
+            <ChatMessages
+            chatMessages={chatMessages} 
+            />
+            { (chatMessages.length ===0) &&
+            <div className='welcome'>
+              Welcome to the chatbot project! Send a message using the textbox below.
+            </div> 
+            }
+            <ChatInput 
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
+            
+            
+            />
+            
+            
+          </div>
+        )
+      }
+      
+      ReactDOM.createRoot(container).render(<App />);
+
+      
+      
+     
+    </script>
+  </body>
+</html>

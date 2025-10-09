@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>E-commerce</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+			
+      const container = document.querySelector('.js-container');
+
+			function toKabebCase(str){
+				str=str.toLowerCase();
+				let s='';
+				
+				for ( let a of str){
+					s+= a===' ' ? '-' : a;
+					};
+					console.log(s);
+				return(`../img/E-commerce/${s}.png`);
+						
+
+					}
+				
+				
+			
+			
+      function App({name, price, discountPrice}){
+        return(
+          <>
+			<div>
+			<img src={toKabebCase(name)} width="70px"/>
+				<p>
+					{name}
+				</p>
+				{discountPrice ? <del>Price: ${price}</del> :<p>Price: ${price}</p>}
+				{discountPrice && <p>Discount price: ${discountPrice}</p> }
+				<button>Add to Cart</button>
+			</div>
+          </>
+        )
+      }
+			function ProductDetails(){
+				return(
+					<>
+					
+						<App 
+						name="Cotton socks"
+						price="10.90"
+						/>
+
+						<App 
+						name="Tennis balls"
+						price="6.00"
+						/>
+						<App 
+						name="Plain T-Shirt"
+						price="7.99"
+						discountPrice="2.99"
+						/>
+
+					</>
+				)
+			}
+      ReactDOM.createRoot(container).render(<ProductDetails 
+			name="Cotton socks"
+			price="10.90" 
+			/>)
+      
+     
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+.text-message{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.css-message-text-user
+{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+
+  
+  
+    
+
+
+}
+.css-message-text-robot{
+  display: flex;
+  justify-content:start;
+}
+.css-message-text{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(238, 238, 238);
+  border-radius: 9px;
+  max-width: 300px;
+  padding: 15px 20px ;
+  font-size: 16px;
+  font-family: Arial;
+}
+.chat-message-profile{
+  width: 45px;
+  object-fit:cover;
+  height: 45px;
+  border-radius: 45px;
+  
+}
+.loading-img{
+  margin: -15px;
+  width: 45px;
+}
+.message-time{
+  display: flex;
+  font-size: 10px;
+  color: gray;
+  justify-content: end;
+  margin-top: 20px;
+  
+}

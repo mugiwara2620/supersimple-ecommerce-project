@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>State and E.H</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+      const container =document.querySelector('.js-container');
+		function App(){
+			let [name, setName] = React.useState('');
+			function AddName(){
+				setName(event.target.value);
+
+
+			}
+
+			return (
+					<>
+						<input 
+						placeholder="Type a name here"
+						onChange={AddName}
+						value={name}
+						 />
+						<button onClick={
+							 ()=>{
+							 setName('');}
+							 }>
+							Reset
+						</button>
+						<button onClick={
+							 ()=>{setName('Alice')}
+							 }>
+							Exemple
+						</button>
+						<p>Hello {name}</p>
+					</>
+			)
+        }
+        ReactDOM.createRoot(container).render(<App />)
+      
+      
+     
+    </script>
+  </body>
+</html>

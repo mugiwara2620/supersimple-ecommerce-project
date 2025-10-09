@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sing up page</title>
+    <style>
+      .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.hello-para{
+  font-size: 17px;
+
+}
+.inputs-box{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  width: 150px;
+  
+  
+}
+
+.buttoms-box{
+  display: flex;
+  gap: 48px;
+  
+}
+.email-input,
+.password-input{
+  font-size: 9px;
+  font-weight: 500;
+  padding: 4px 7px;
+
+  border-radius: 5px;
+
+  outline: none;
+  
+
+}
+.email-input:focus
+{
+  border-color:rgb(0,123,255) ;
+}
+.password-input:focus{
+  border-color: rgb(17, 255, 0)
+
+}
+.login-button,
+.sing-up-button{
+
+  
+  color: white;
+
+  border-radius: 20px;
+  width: 50px;
+  margin-top: 1px;
+  padding: 5px 7px ;
+}
+.login-button{
+  background-color: rgb(0,123,255);
+  border-color:rgb(0, 104, 214) ;
+}
+.sing-up-button{
+  background-color: rgb(255, 78, 78);
+  border-color: rgb(255, 35, 35);
+}
+
+.show-password,
+.hide-password{
+  border-radius: 20px;
+  border-color: rgb(114, 114, 114);
+  background-color: rgb(59, 59, 59);
+  color: white;
+  padding: 6px 7px;
+
+
+  margin-left: auto;
+  margin-right: auto;
+}
+button:hover{
+  cursor: pointer;
+}
+.container{
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+body{
+        font-family: Arial;
+        font-weight: 40px;
+      }
+
+
+      
+
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js">
+     
+    </script>
+    <script type="text/babel">
+      const container =document.querySelector('.js-container');
+
+      
+
+      function App(){
+        const [showPassword, setShowPassword]=React.useState(true);
+        const [passwordText, setPasswordText]= React.useState('text');
+        
+        function isShowed(){
+          setShowPassword(!showPassword);
+          if(showPassword){
+            setPasswordText('text');
+          }else{
+            setPasswordText('password')
+          }
+        }
+        return(
+          <div className="container">
+            <p 
+            className="hello-para"
+            >
+              Hello, welcome to my website
+            </p>
+            <div className="inputs-box">
+              <input 
+              className="email-input"
+              placeholder="Email"/>
+              
+              {
+                showPassword 
+                ?
+                <>
+                  <input 
+                  className="password-input"
+                  placeholder="Password"
+                  type={passwordText}/>
+                  <button
+                  className="show-password"
+                  onClick={isShowed}
+                  >
+                    Show
+                  </button>
+                </>
+                :
+                <>
+                  <input 
+                  className="password-input"
+                  placeholder="Password"
+                  type={passwordText}/>
+                  <button
+                  className="hide-password"
+                  onClick={isShowed}
+                  
+                  >
+                  
+                  Hide 
+                  </button>
+                </>
+              }
+              
+            </div>
+            
+            <div className="buttoms-box">
+              <button
+              className="login-button"
+              >Login
+              </button>
+              <button
+              className="sing-up-button"
+              >Sing up
+              </button>
+            </div>
+          </div>
+        )
+      };
+
+
+
+
+
+      ReactDOM.createRoot(container).render(<App />);
+      
+      
+     
+    </script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.hello-para{
+  font-size: 17px;
+
+}
+.inputs-box{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  width: 150px;
+  
+  
+}
+
+.buttoms-box{
+  display: flex;
+  gap: 48px;
+  
+}
+.email-input,
+.password-input{
+  font-size: 9px;
+  font-weight: 500;
+  padding: 4px 7px;
+
+  border-radius: 5px;
+
+  outline: none;
+  
+
+}
+.email-input:focus
+{
+  border-color:rgb(0,123,255) ;
+}
+.password-input:focus{
+  border-color: rgb(17, 255, 0)
+
+}
+.login-button,
+.sing-up-button{
+
+  
+  color: white;
+
+  border-radius: 20px;
+  width: 50px;
+  margin-top: 1px;
+  padding: 5px 7px ;
+}
+.login-button{
+  background-color: rgb(0,123,255);
+  border-color:rgb(0, 104, 214) ;
+}
+.sing-up-button{
+  background-color: rgb(255, 78, 78);
+  border-color: rgb(255, 35, 35);
+}
+
+.show-password,
+.hide-password{
+  border-radius: 20px;
+  border-color: rgb(114, 114, 114);
+  background-color: rgb(59, 59, 59);
+  color: white;
+  padding: 6px 7px;
+
+
+  margin-left: auto;
+  margin-right: auto;
+}
+button:hover{
+  cursor: pointer;
+}
+.container{
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
