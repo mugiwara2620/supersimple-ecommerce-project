@@ -1,4 +1,5 @@
 import {HomePage} from './pages/HomePage';
+import {Checkout} from './pages/CheckoutPage';
 import { Routes ,Route} from 'react-router';
 import './App.css'
 
@@ -14,7 +15,7 @@ function App() {
         
       <Route 
        path='checkout'
-       element={<div color='red'>hnsdknskdnksndknksndnkskndnsdnksnkdnkskdnksnkdnkskdnksdnskndello aymane</div>}
+       element={<Checkout />}
       />
       
     </Routes>
