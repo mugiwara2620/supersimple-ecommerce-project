@@ -2,8 +2,8 @@ import {HomePage} from './pages/HomePage';
 import {Checkout} from './pages/checkout/CheckoutPage';
 import {Orders} from './pages/Orders'
 import { Tracking} from './pages/TrackingPage'
-
-import { Routes ,Route} from 'react-router';
+import {NotFound} from './pages/404Page'; 
+ import { Routes ,Route} from 'react-router';
 import './App.css'
 
 function App() {
@@ -28,7 +28,10 @@ function App() {
        path='tracking'
        element={<Tracking />}
       />
-      
+      <Route
+       path='*'
+       element={<NotFound />}
+      />
     </Routes>
   )
 }
