@@ -1,10 +1,45 @@
-import {NavLink} from 'react-router'
+import { NavLink } from 'react-router'
 import './Header.css'
+import {useEffect } from 'react'
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import logoWhite from "../assets/images/logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
-export function Header() {
+export function Header({ cart }) {
+    // const [a , setA] = useState(0);
+    
+    let cartQuantity= 0;
+			if (cart) {
+				cart.map((product) => {
+					cartQuantity+= product.quantity;
+				})}
+			
+
+			console.log(cartQuantity);
+    // useEffect(
+    //             ()=>{
+    //                 console.log(cartQuantity)	
+    // useEffect(
+    //             ()=>{	
+    //                 console.log(0);
+    //                 setCartQuantity(cartQuantity);
+    
+                    
+                    
+                    
+    //         }
+    //             ,[cartQuantity]
+    //     )
+    // let s=0;
+    // if (cart) {
+    //     cart.map((product) => {
+    //         s += product.quantity;
+    //     })
+    // }
+    // console.log(s);
+    // setA(s);
+    // document.querySelector('.cart-quantity').innerHTML = a;
+// },[cartQuantity]);
     return (
         <div className="header">
             <div className="left-section">
@@ -32,7 +67,7 @@ export function Header() {
 
                 <NavLink className="cart-link header-link" to="/checkout">
                     <img className="cart-icon" src={cartIcon} />
-                    <div className="cart-quantity">3</div>
+                    <div className="cart-quantity">{cartQuantity}</div>
                     <div className="cart-text">Cart</div>
                 </NavLink>
             </div>
