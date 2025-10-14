@@ -1,49 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react'
 import './HomePage.css'
+import {formatMoney} from '../utils/money.js'
 import { Header } from '../components/Header'
 // import { products } from '../../starting-code/data/products.js'
 
 
-export function HomePage() {
-	
-	const [products, setProducts] = useState([]);
-	const [cart, setCart] = useState([]);
-	
-	useEffect(() => {
-		axios.get('/api/products')
-			.then((response) => {
-				setProducts(response.data);
-
-			})
-		axios.get('/api/cart-items')
-			.then((response) => {
-				setCart(response.data);
-			}
-			)
-
-	}, []);
-
-
+export function HomePage({cart,setCart,products}) {
 	function Product({ image, name, rating, priceCents, id }) {
 		const refElement = useRef('');
 		
-
-		// useEffect(
-		// 	() => {
-		// 		console.log(0);
-		// 		setCartQuantity(cartquantity);
-
-
-
-
-		// 	}
-		// 	, [cartquantity]
-		// ) 
-
-
-
-
 		function addToCart(quantity) {
 			
 			cart.push(
@@ -80,7 +46,7 @@ export function HomePage() {
 					</div>
 
 					<div className="product-price">
-						${(priceCents / 100).toFixed(2)}
+						{formatMoney(priceCents)}
 					</div>
 
 					<div ref={refElement} className="product-quantity-container">
@@ -145,6 +111,7 @@ export function HomePage() {
 				</>
 			)
 		}
+
 		
 		return (
 			<>
