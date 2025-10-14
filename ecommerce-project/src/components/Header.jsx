@@ -1,13 +1,12 @@
 import { NavLink } from 'react-router'
 import './Header.css'
-import {useEffect } from 'react'
+// import {useEffect } from 'react'
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import logoWhite from "../assets/images/logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
 export function Header({ cart }) {
     // const [a , setA] = useState(0);
-    
     let cartQuantity= 0;
 			if (cart) {
 				cart.map((product) => {
@@ -15,7 +14,6 @@ export function Header({ cart }) {
 				})}
 			
 
-			console.log(cartQuantity);
     // useEffect(
     //             ()=>{
     //                 console.log(cartQuantity)	

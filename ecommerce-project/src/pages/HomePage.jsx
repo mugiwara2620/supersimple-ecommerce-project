@@ -121,6 +121,7 @@ export function HomePage() {
 
 
 		}
+		
 
 		function Products() {
 
@@ -144,6 +145,7 @@ export function HomePage() {
 				</>
 			)
 		}
+		
 		return (
 			<>
 				<link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
