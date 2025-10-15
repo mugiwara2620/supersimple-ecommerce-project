@@ -15,7 +15,7 @@ export function Checkout({ cart }) {
 			})
 	}, [])
 
-	function ProductData() {
+	function ProductData({selectedDeliveryOption}) {
 		
 
 		
@@ -23,17 +23,16 @@ export function Checkout({ cart }) {
 		let y =
 			cart.map((product) => {
 				const productData = product.product;
-				let dayDelivery = dayjs().format('dddd, MMMM D');
+				console.log(selectedDeliveryOption);
 
 				
 
 
 				return (
-
-
+					
 					<div key={product.name} className="cart-item-container">
 						<div className="delivery-date">
-							Delivery date: {dayDelivery}
+							Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
 						</div>
 
 						<div className="cart-item-details-grid">
@@ -67,16 +66,15 @@ export function Checkout({ cart }) {
 								{deliveryOptions.map((deliveryOption) => {
 									console.log(deliveryOption);
 									return (
-										<div className="delivery-option">
+										<div key={deliveryOption.id} className="delivery-option">
 											<input 
 												type="radio" 
 												checked={deliveryOption.id === product.deliveryOptionId}
 												className="delivery-option-input{ productData.name}"
 												name={`deliver-option-${product.id}`}
 												onClick={()=>{
-													
+													product.deliveryOptionId = deliveryOption.id;
 													document.querySelector('.delivery-date').innerHTML
-													document.querySelector('.delivery-date').innerHTML=dayjs(deliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D');
 												}}
 												 />
 											<div>
@@ -113,10 +111,12 @@ export function Checkout({ cart }) {
 
 
 	}
+	let selectedDeliveryOption;
 	return (
 		<>
 			<link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
 			<title>Chekout</title>
+
 			<CheckoutHeader />
 
 			<div className="checkout-page">
@@ -273,7 +273,17 @@ export function Checkout({ cart }) {
 								</div>
 							</div>
 						</div> */}
-						<ProductData />
+						
+						{deliveryOptions.length > 0 && cart.map((cartItem)=>{
+							 selectedDeliveryOption = deliveryOptions
+								.find((deliveryOption)=>{
+									return deliveryOption.id === cartItem.deliveryOptionId;
+							})
+						})
+
+						}
+						<ProductData
+						selectedDeliveryOption={selectedDeliveryOption} />
 					</div>
 
 					<div className="payment-summary">
