@@ -1,7 +1,6 @@
-import dayjs from 'dayjs';
-import { formatMoney } from '../../utils/money.js';
-import axios from 'axios';
 import { DeliveryOptions } from './DeliveryOptions.jsx';
+import {CartItemDetails} from './CartItemDetails.jsx';
+import {DeliveryDate} from './DeliveryDate.jsx';
 
 
 export function OrderSummary({cart,selectedDeliveryOption,deliveryOptions}) {
@@ -13,39 +12,15 @@ export function OrderSummary({cart,selectedDeliveryOption,deliveryOptions}) {
                     return (
 
                         <div key={product.productId} className="cart-item-container">
-                            <div className="delivery-date">
-                                Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
-                            </div>
+                            <DeliveryDate
+                            selectedDeliveryOption={selectedDeliveryOption}
+                             />
 
                             <div className="cart-item-details-grid">
-                                <img className="product-image"
-                                    src={productData.image} />
-
-                                <div className="cart-item-details">
-                                    <div className="product-name">
-                                        {productData.name}
-                                    </div>
-                                    <div className="product-price">
-                                        {formatMoney(productData.priceCents)}
-                                    </div>
-                                    <div className="product-quantity">
-                                        <span>
-                                            Quantity: <span className="quantity-label">{product.quantity}</span>
-                                        </span>
-                                        <span className="update-quantity-link link-primary">
-                                            Update
-                                        </span>
-                                        <span
-                                            className="delete-quantity-link link-primary"
-                                            onClick={() => {
-                                                axios.delete(`/api/cart-items/:${product.productId}`).then((response) => {
-                                                    console.log(response.data);
-                                                })
-                                            }}>
-                                            Delete
-                                        </span>
-                                    </div>
-                                </div>
+                                <CartItemDetails 
+                                productData={productData}
+                                product={product}
+                                />
 
                                 <DeliveryOptions
                                 product = {product}

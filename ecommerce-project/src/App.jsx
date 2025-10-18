@@ -23,6 +23,7 @@ function App() {
 
 
   useEffect(() => {
+    console.log('useEffect returned')
     
 		const getHomePage= async ()=>{
         const response = await axios.get('/api/products');

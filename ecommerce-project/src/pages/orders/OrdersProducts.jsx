@@ -42,7 +42,6 @@ export function OrdersProducts({orders}) {
             )
 
         });
-        console.log(productsOrder);
         return (
             <div className="order-container">
                 <div className="order-header">
