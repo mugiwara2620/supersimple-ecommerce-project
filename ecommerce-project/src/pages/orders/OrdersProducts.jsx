@@ -9,6 +9,8 @@ export function OrdersProducts({orders}) {
         console.log(products);
         const productsOrder = products.map((productsOrder) => {
             const product = productsOrder.product;
+            console.log(order);
+
             return (
                 <div className="order-details-grid">
                     <div className="product-image-container">
@@ -32,7 +34,7 @@ export function OrdersProducts({orders}) {
                     </div>
 
                     <div className="product-actions">
-                        <a href="/tracking">
+                        <a href={`/tracking/${order.id}/${product.id}`}>
                             <button className="track-package-button button-secondary">
                                 Track package
                             </button>

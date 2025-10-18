@@ -11,6 +11,7 @@ export function Header({ cart }) {
 				cart.map((product) => {
 					cartQuantity+= product.quantity;
 				})}
+    console.log(cart);
 			
 
     return (
