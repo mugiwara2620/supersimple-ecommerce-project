@@ -1,24 +1,29 @@
+import {  useRef } from 'react'
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react'
 import './HomePage.css'
 import {formatMoney} from '../utils/money.js'
 import { Header } from '../components/Header'
 // import { products } from '../../starting-code/data/products.js'
 
 
-export function HomePage({cart,setCart,products}) {
+export function HomePage({cart,products}) {
 	function Product({ image, name, rating, priceCents, id }) {
 		const refElement = useRef('');
 		
 		function addToCart(quantity) {
-			
-			cart.push(
-				{
-					id: 1,
+
+			axios.post('/api/cart-items',{
+					
 					productId: id,
 					quantity: Number(quantity),
-					deliveryOptionId: "1"
-				});
+					
+				}).then((response)=>{
+					console.log(response.data);
+					console.log(cart);
+
+			})
+			
+
 			
 			
 

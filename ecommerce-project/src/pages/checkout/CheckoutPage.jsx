@@ -7,7 +7,7 @@ import { formatMoney } from '../../utils/money.js';
 import { CheckoutHeader } from './CheckoutHeader';
 
 export function Checkout({ cart }) {
-	console.log(cart);
+		console.log(cart);
 	const [deliveryOptions, setDeliveryOptions] = useState([]);
 	const [payementSummary, setPayementSummary] = useState(null);
 
@@ -24,14 +24,10 @@ export function Checkout({ cart }) {
 	}, [])
 
 	function ProductData({ selectedDeliveryOption }) {
-
-
-
-
+		if (selectedDeliveryOption){
 		let y =
 			cart.map((product) => {
 				const productData = product.product;
-				console.log(selectedDeliveryOption);
 
 
 
@@ -61,7 +57,13 @@ export function Checkout({ cart }) {
 									<span className="update-quantity-link link-primary">
 										Update
 									</span>
-									<span className="delete-quantity-link link-primary">
+									<span 
+									className="delete-quantity-link link-primary"
+									onClick={()=>{
+										axios.delete(`/api/cart-items/:${product.productId}`).then((response)=>{
+											console.log(response.data);
+										})
+									}}>
 										Delete
 									</span>
 								</div>
@@ -72,7 +74,6 @@ export function Checkout({ cart }) {
 									Choose a delivery option:
 								</div>
 								{deliveryOptions.map((deliveryOption) => {
-									console.log(deliveryOption);
 									return (
 										<div key={deliveryOption.id} className="delivery-option">
 											<input
@@ -108,17 +109,9 @@ export function Checkout({ cart }) {
 
 				)
 			})
-
-
-
-
-		console.log(y);
 		return y;
-
-
-
+		}
 	}
-
 	let selectedDeliveryOption;
 	return (
 		<>

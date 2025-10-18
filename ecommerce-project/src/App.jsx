@@ -12,7 +12,18 @@ function App() {
   
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
+  //  const [orders, setOrders] = useState([]);
+  // useEffect(()=>{
+  // axios.get('/api/orders?expand=products')
+  //     .then((response) => {
+  //       setOrders(response.data);
+        
+  //     })},[])
+
+
+
   useEffect(() => {
+    
 		axios.get('/api/products')
 			.then((response) => {
 				setProducts(response.data);
@@ -21,6 +32,7 @@ function App() {
 		axios.get('/api/cart-items?expand=product')
 			.then((response) => {
 				setCart(response.data);
+        console.log(cart);
 			}
 			)
 
@@ -52,7 +64,10 @@ function App() {
       />
       <Route 
        path='orders'
-       element={<Orders />}
+       element={
+       <Orders
+         cart={cart}
+         />}
       />
       <Route 
        path='tracking'
