@@ -1,7 +1,7 @@
-import {HomePage} from './pages/HomePage';
+import {HomePage} from './pages/home/HomePage';
 import {Checkout} from './pages/checkout/CheckoutPage';
 import {useState,useEffect} from 'react';
-import {Orders} from './pages/Orders'
+import {Orders} from './pages/orders/Orders'
 import axios from 'axios';
 import { Tracking} from './pages/TrackingPage'
 import {NotFound} from './pages/404Page'; 
