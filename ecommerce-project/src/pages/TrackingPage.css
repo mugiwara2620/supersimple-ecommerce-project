@@ -59,8 +59,9 @@
     margin-bottom: 5px;
   }
 
-  .tracking-page .progress-label {
+  .tracking-page .progress-label-a {
     margin-bottom: 3px;
+    color:black;
   }
 }
 

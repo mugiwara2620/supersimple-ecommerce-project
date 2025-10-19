@@ -20,6 +20,7 @@ function App() {
   //       setOrders(response.data);
         
   //     })},[])
+
   const [orders, setOrders] = useState([]);
   useEffect(()=>{
     const getOrdersData=async ()=>{
@@ -30,9 +31,7 @@ function App() {
 
 
 
-  useEffect(() => {
-    console.log('useEffect returned')
-    
+  useEffect(() => {    
 		const getHomePage= async ()=>{
         const response = await axios.get('/api/products');
       	setProducts(response.data);
@@ -87,7 +86,7 @@ function App() {
          />}
       />
       <Route 
-       path='tracking'
+       path='tracking/:orderId/:productId'
        element={
        <Tracking
         cart={cart}
@@ -100,7 +99,9 @@ function App() {
       /> */}
       <Route
        path='*'
-       element={<NotFound />}
+       element={<NotFound 
+       cart={cart}
+       />}
       />
     </Routes>
   )

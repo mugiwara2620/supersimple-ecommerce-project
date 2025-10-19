@@ -10,9 +10,7 @@ export function Header({ cart }) {
 			if (cart) {
 				cart.map((product) => {
 					cartQuantity+= product.quantity;
-				})}
-    console.log(cart);
-			
+				})}			
 
     return (
         <div className="header">

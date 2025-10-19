@@ -6,10 +6,9 @@ import dayjs from 'dayjs';
 export function OrdersProducts({orders}) {
     function Order({ order }) {
         const products = order.products;
-        console.log(products);
+
         const productsOrder = products.map((productsOrder) => {
             const product = productsOrder.product;
-            console.log(order);
 
             return (
                 <div className="order-details-grid">
@@ -22,7 +21,7 @@ export function OrdersProducts({orders}) {
                             {product.name}
                         </div>
                         <div className="product-delivery-date">
-                            Arriving on: {dayjs(productsOrder.estimatedDeliveyTimeMs).format('MMMM d')}
+                            Arriving on: {dayjs(productsOrder.estimatedDeliveyTimeMs).format('MMMM D')}
                         </div>
                         <div className="product-quantity">
                             Quantity: {productsOrder.quantity}
