@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import { Header } from '../../components/Header';
 import {OrdersProducts} from './OrdersProducts';
 
-export function Orders({ cart }) {
+export function Orders({ cart,loadCartData }) {
    const [orders, setOrders] = useState([]);
     useEffect(()=>{
       const getOrdersData=async ()=>{
@@ -27,6 +27,7 @@ export function Orders({ cart }) {
         <div className="orders-grid">
            
           <OrdersProducts
+          loadCartData={loadCartData}
           orders={orders} />
           
           

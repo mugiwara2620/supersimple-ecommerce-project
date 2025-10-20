@@ -5,8 +5,10 @@ import {Orders} from './pages/orders/Orders'
 import axios from 'axios';
 import { Tracking} from './pages/TrackingPage';
 import {NotFound} from './pages/404Page'; 
- import { Routes ,Route} from 'react-router';
+import { Routes ,Route} from 'react-router';
 import './App.css'
+
+window.axios=axios;
 
 function App() {
   
@@ -78,6 +80,7 @@ function App() {
        element={
        <Orders
          cart={cart}
+         loadCartData={loadCartData}
         
          
          />}

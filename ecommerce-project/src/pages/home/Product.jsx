@@ -58,13 +58,11 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
                 <button
                     className="add-to-cart-button button-primary"
                     onClick={async () => {
-                        // const quantity = document.getElementById(id).value;
                         await axios.post('/api/cart-items', {
                             productId: id,
                             quantity: quantity,
                         });
                             await loadCartData();
-                            console.log()
 
                         }}
 

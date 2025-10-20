@@ -1,9 +1,10 @@
 import { formatMoney } from '../../utils/money';
 import dayjs from 'dayjs';
+import axios from 'axios';
 
 
 
-export function OrdersProducts({orders}) {
+export function OrdersProducts({ orders,loadCartData }) {
     function Order({ order }) {
         const products = order.products;
 
@@ -11,7 +12,9 @@ export function OrdersProducts({orders}) {
             const product = productsOrder.product;
 
             return (
-                <div className="order-details-grid">
+                <div 
+                key={product.id}
+                className="order-details-grid">
                     <div className="product-image-container">
                         <img src={product.image} />
                     </div>
@@ -28,7 +31,21 @@ export function OrdersProducts({orders}) {
                         </div>
                         <button className="buy-again-button button-primary">
                             <img className="buy-again-icon" src="images/icons/buy-again.png" />
-                            <span className="buy-again-message">Add to Cart</span>
+                            <span
+                                onClick={
+                                    async () => {
+                                        console.log(product);
+                                        await axios.post('/api/cart-items', {
+                                            productId: product.id,
+                                            quantity: 1,
+                                        });
+                                        await loadCartData();
+
+                                    }
+                                }
+                                className="buy-again-message">
+                                Add to Cart
+                            </span>
                         </button>
                     </div>
 
@@ -73,7 +90,9 @@ export function OrdersProducts({orders}) {
 
 
     return (orders.map((order) => {
-        return (<Order order={order} />)
+        return (<Order
+                key={order.id}
+                order={order} />)
 
     }))
 

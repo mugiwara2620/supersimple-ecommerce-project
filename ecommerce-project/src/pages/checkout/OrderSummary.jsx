@@ -1,7 +1,6 @@
 import { DeliveryOptions } from './DeliveryOptions.jsx';
 import {CartItemDetails} from './CartItemDetails.jsx';
 import {DeliveryDate} from './DeliveryDate.jsx';
-import dayjs from 'dayjs';
 
 
 export function OrderSummary({cart,selectedDeliveryOption,deliveryOptions,fetchCheckoutData,loadCartData}) {
@@ -10,7 +9,6 @@ export function OrderSummary({cart,selectedDeliveryOption,deliveryOptions,fetchC
             let y =
                 cart.map((product) => {
                     const productData = product.product;
-                    console.log(dayjs(product.deliveryOptionId).format('dddd, MMMM D'))
                     return (
 
                         <div key={product.productId} className="cart-item-container">
