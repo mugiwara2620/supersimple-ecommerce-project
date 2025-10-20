@@ -6,6 +6,8 @@ import { formatMoney } from '../../utils/money.js'
 
 export function Product({ image, name, rating, priceCents, id, loadCartData }) {
         const [quantity, setQuantity] = useState(1);
+        const [isAdded, setIsAdded]= useState(false);
+        let setId;
         return (
             <div className="product-container">
                 <div className="product-image-container">
@@ -50,7 +52,10 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
 
                 <div className="product-spacer"></div>
 
-                <div className="added-to-cart">
+                <div 
+                className="added-to-cart"
+                style={{opacity:isAdded ? 1:0}}
+                >
                     <img src="images/icons/checkmark.png" />
                     Added
                 </div>
@@ -62,7 +67,15 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
                             productId: id,
                             quantity: quantity,
                         });
-                            await loadCartData();
+                        await loadCartData();
+                        
+                        setIsAdded(true);
+                        clearTimeout(setId);
+                        setId = setTimeout(()=>{
+                            setIsAdded(false);
+
+                        },2000);
+                        
 
                         }}
 
