@@ -1,10 +1,17 @@
-// import axios from 'axios';
+import axios from 'axios';
 import './Orders.css'
-// import {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { Header } from '../../components/Header';
 import {OrdersProducts} from './OrdersProducts';
 
-export function Orders({ cart,orders }) {
+export function Orders({ cart }) {
+   const [orders, setOrders] = useState([]);
+    useEffect(()=>{
+      const getOrdersData=async ()=>{
+        const response = await axios.get('/api/orders?expand=products');
+        setOrders(response.data); };
+      getOrdersData();
+      },[]);
   
   return (
 

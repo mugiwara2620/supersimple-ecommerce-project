@@ -4,7 +4,10 @@ import axios from 'axios';
 
 
 
-export function CartItemDetails({ productData,product }) {
+export function CartItemDetails({ productData,product,loadCartData }) {
+    const deleteProduct = async()=>{
+        axios.delete(`/api/cart-items/${product.productId}`)
+    }
     return (
         <>
             <img className="product-image"
@@ -18,18 +21,22 @@ export function CartItemDetails({ productData,product }) {
                     {formatMoney(productData.priceCents)}
                 </div>
                 <div className="product-quantity">
-                    <span>
+                    <span className='updated-quantity'> 
                         Quantity: <span className="quantity-label">{product.quantity}</span>
                     </span>
-                    <span className="update-quantity-link link-primary">
+                    <span 
+                    className="update-quantity-link link-primary"
+                    onClick={()=>{
+                        document.querySelector('.updated-quantity').innerHTML = `<input type="number"/>`; 
+                        
+                    }}>
                         Update
                     </span>
                     <span
                         className="delete-quantity-link link-primary"
-                        onClick={() => {
-                            axios.delete(`/api/cart-items/:${product.productId}`).then((response) => {
-                                console.log(response.data);
-                            })
+                        onClick={()=>{
+                            deleteProduct();
+                            loadCartData();
                         }}>
                         Delete
                     </span>

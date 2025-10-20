@@ -3,7 +3,7 @@ import './HomePage.css'
 import { Header } from '../../components/Header.jsx'
 
 
-export function HomePage({cart,products}) {
+export function HomePage({cart,products,loadCartData}) {
 	
 	return (
 			<>
@@ -18,6 +18,7 @@ export function HomePage({cart,products}) {
 						<ProductsGrid 
 						products={products}
 						cart={cart}
+						loadCartData={loadCartData}
 						 />
 					</div>
 				</div>

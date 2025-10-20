@@ -4,7 +4,6 @@ import {useState,useEffect} from 'react';
 import {Orders} from './pages/orders/Orders'
 import axios from 'axios';
 import { Tracking} from './pages/TrackingPage';
-import { TrackingPages } from './pages/TrackingPages';
 import {NotFound} from './pages/404Page'; 
  import { Routes ,Route} from 'react-router';
 import './App.css'
@@ -20,14 +19,13 @@ function App() {
   //       setOrders(response.data);
         
   //     })},[])
+  const loadCartData = async()=>{ 
+      const response= await axios.get('/api/cart-items?expand=product');
+			setCart(response.data);
+       
+			};
 
-  const [orders, setOrders] = useState([]);
-  useEffect(()=>{
-    const getOrdersData=async ()=>{
-      const response = await axios.get('/api/orders?expand=products');
-      setOrders(response.data); };
-    getOrdersData();
-    },[]);
+ 
 
 
 
@@ -42,16 +40,12 @@ function App() {
 			
 
 			
-		const fetchAppData = async()=>{ 
-      const response= await axios.get('/api/cart-items?expand=product');
-			setCart(response.data);
-       
-			};
-    fetchAppData();
+		
+    loadCartData();
     
 			
 
-	}, [ ]);
+	}, []);
 
 
 
@@ -64,6 +58,7 @@ function App() {
         cart={cart}
         setCart={setCart}
         products={products}
+        loadCartData={loadCartData}
        
          />
         } />
@@ -74,6 +69,7 @@ function App() {
        cart={cart}
        setCart={setCart}
        products={products}
+       loadCartData={loadCartData}
        
         />}
       />
@@ -82,7 +78,8 @@ function App() {
        element={
        <Orders
          cart={cart}
-         orders={orders}
+        
+         
          />}
       />
       <Route 
@@ -92,11 +89,6 @@ function App() {
         cart={cart}
        />}
       />
-      
-      {/* <TrackingPages
-        orders={orders}
-        cart={cart}
-      /> */}
       <Route
        path='*'
        element={<NotFound 
