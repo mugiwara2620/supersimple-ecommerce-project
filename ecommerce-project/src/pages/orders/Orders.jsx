@@ -19,7 +19,8 @@ export function Orders({ cart,loadCartData }) {
       <link rel="icon" type="image/svg+xml" href="/orders-favicon.png" />
       <title>Orders</title>
       <Header
-        cart={cart} />
+        cart={cart}
+         />
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>

@@ -9,6 +9,7 @@ export function Tracking({ cart }) {
 
   const { orderId, productId } = useParams();
   const [order, setOrder] = useState();
+  
 
   useEffect(() => {
     const getTrackingData = async () => {
@@ -33,9 +34,6 @@ export function Tracking({ cart }) {
     const isPreparing = deliveryCssPercentage<33;
     const isShipping = (deliveryCssPercentage<66 && deliveryCssPercentage>=33);
     const isDelivering = (deliveryCssPercentage<=100 && deliveryCssPercentage>=66);
-    console.log(isPreparing);
-    console.log(isShipping);
-    console.log(isDelivering);
     
 
 

@@ -1,6 +1,6 @@
 import {HomePage} from './pages/home/HomePage';
 import {Checkout} from './pages/checkout/CheckoutPage';
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import {Orders} from './pages/orders/Orders'
 import axios from 'axios';
 import { Tracking} from './pages/TrackingPage';
@@ -27,27 +27,6 @@ function App() {
        
 			};
 
- 
-
-
-
-  useEffect(() => {    
-		const getHomePage= async ()=>{
-        const response = await axios.get('/api/products');
-      	setProducts(response.data);
-    };
-    getHomePage();
-
-			
-			
-
-			
-		
-    loadCartData();
-    
-			
-
-	}, []);
 
 
 
@@ -60,6 +39,7 @@ function App() {
         cart={cart}
         setCart={setCart}
         products={products}
+        setProducts={setProducts}
         loadCartData={loadCartData}
        
          />

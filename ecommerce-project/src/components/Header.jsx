@@ -1,19 +1,24 @@
-import { NavLink } from 'react-router'
-import './Header.css'
-import {useState} from 'react'
+import { NavLink, useNavigate} from 'react-router'
+import './Header.css';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router';
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import logoWhite from "../assets/images/logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
 
-export function Header({ cart }) {
-    const [searched,setSearched] = useState('');
+export function Header({ cart}) {
+    const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
+
+	const searchText = searchParams.get('searchText');
+    const [search, setSearch] = useState(searchText || '');
+
     let cartQuantity= 0;
 			if (cart) {
 				cart.map((product) => {
 					cartQuantity+= product.quantity;
 				})}			
-
     return (
         <div className="header">
             <div className="left-section">
@@ -28,13 +33,29 @@ export function Header({ cart }) {
             <div className="middle-section">
                 <input 
                 className="search-bar" type="text" placeholder="Search"
-                value={searched}
+                value={search}
                 onChange={(e)=>{
-                    console.log(e.target.value);
-                    setSearched(e.target.value);
+                    setSearch(e.target.value);
+                }}
+                onKeyDown={(e)=>{
+                    let key = e.key;
+                    console.log(key);
+                    if (key==="Enter"){
+
+                        navigate(`/?search=${search}`);
+                        
+                        
+                        };
+
                 }} />
 
-                <button className="search-button">
+                <button
+                className="search-button"
+                onClick={()=>{
+                    navigate(`/?search=${search}`);
+                }}
+                
+                >
                     <img className="search-icon" src={searchIcon} />
                 </button>
             </div>
