@@ -11,7 +11,7 @@ export function Header({ cart}) {
     const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 
-	const searchText = searchParams.get('searchText');
+	const searchText = searchParams.get('search');
     const [search, setSearch] = useState(searchText || '');
 
     let cartQuantity= 0;
