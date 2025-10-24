@@ -59,7 +59,9 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
                 className="added-to-cart"
                 style={{ opacity: isAdded ? 1 : 0 }}
             >
-                <img src="images/icons/checkmark.png" />
+                <img 
+                src="images/icons/checkmark.png"
+                data-testid="add-to-cart-button" />
                 Added
             </div>
 
