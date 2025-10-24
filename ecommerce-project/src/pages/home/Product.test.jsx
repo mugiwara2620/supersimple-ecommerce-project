@@ -16,6 +16,7 @@ describe('Product component', () => {
             keywords: ["socks", "sports", "apparel"]
         };
         const loadCartData = vi.fn();
+        const rating = product.rating;
 
         render(<Product
             key={product.id}
@@ -26,9 +27,23 @@ describe('Product component', () => {
             id={product.id}
             loadCartData={loadCartData}
         />);
-        expect(screen.getByText("Black and Gray Athletic Cotton Socks - 6 Pairs")).toBeInTheDocument();
+        expect(
+            screen.getByText("Black and Gray Athletic Cotton Socks - 6 Pairs")
+        ).toBeInTheDocument();
 
+        expect(
+            screen.getByText("$10.90")
+        ).toBeInTheDocument();
 
-        
+        expect(
+            screen.getByTestId('product-image')
+        ).toHaveAttribute('src', "images/products/athletic-cotton-socks-6-pairs.jpg");
+
+        expect(
+            screen.getByTestId('product-rating')
+        ).toHaveAttribute('src',`images/ratings/rating-${(rating.stars) * 10}.png`);
+        expect(
+            screen.getByText(`${rating.count}`)
+        ).toBeInTheDocument();
     })
 })

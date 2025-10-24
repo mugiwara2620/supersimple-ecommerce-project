@@ -10,7 +10,8 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
         <div className="product-container">
             <div className="product-image-container">
                 <img className="product-image"
-                    src={image} />
+                    src={image}
+                    data-testid="product-image" />
             </div>
 
             <div className="product-name limit-text-to-2-lines">
@@ -19,7 +20,8 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
 
             <div className="product-rating-container">
                 <img className="product-rating-stars"
-                    src={`images/ratings/rating-${(rating.stars) * 10}.png`} />
+                    src={`images/ratings/rating-${(rating.stars) * 10}.png`}
+                    data-testid = 'product-rating' />
                 <div className="product-rating-count link-primary">
                     {rating.count}
                 </div>
