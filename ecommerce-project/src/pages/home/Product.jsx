@@ -60,13 +60,13 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
                 style={{ opacity: isAdded ? 1 : 0 }}
             >
                 <img 
-                src="images/icons/checkmark.png"
-                data-testid="add-to-cart-button" />
+                src="images/icons/checkmark.png"/>
                 Added
             </div>
 
             <button
                 className="add-to-cart-button button-primary"
+                data-testid="add-to-cart-button" 
                 onClick={async () => {
                     await axios.post('/api/cart-items', {
                         productId: id,
