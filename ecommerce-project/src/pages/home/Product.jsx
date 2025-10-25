@@ -7,7 +7,8 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
     const [isAdded, setIsAdded] = useState(false);
     let setId;
     return (
-        <div className="product-container">
+        <div className="product-container"
+        data-testid="product-container">
             <div className="product-image-container">
                 <img className="product-image"
                     src={image}
@@ -38,7 +39,8 @@ export function Product({ image, name, rating, priceCents, id, loadCartData }) {
                         const quantitySelected = Number(event.target.value);
                         setQuantity(quantitySelected);
                         console.log(quantity);
-                    }}>
+                    }}
+                    data-testid="selector-container">
 
                     <option value="1">1</option>
                     <option value="2">2</option>

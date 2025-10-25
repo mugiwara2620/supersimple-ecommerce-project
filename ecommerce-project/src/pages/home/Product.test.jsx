@@ -5,8 +5,9 @@ import { Product } from './Product';
 import axios from 'axios';
 
 vi.mock('axios');  //mock the package
-
+let user;
 describe('Product component', () => {
+
     let product = {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -51,6 +52,7 @@ describe('Product component', () => {
     });
     loadCartData = vi.fn();
     beforeEach(() => {
+        user = userEvent.setup();
         product = {
             id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
             image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -74,9 +76,7 @@ describe('Product component', () => {
             id={product.id}
             loadCartData={loadCartData}
         />);
-
-        const user = userEvent.setup();
-        const addToCartButton = screen.getByTestId('add-to-cart-button');
+        let addToCartButton = screen.getByTestId('add-to-cart-button');
         await user.click(addToCartButton);
 
         expect(axios.post).toHaveBeenCalledWith(
@@ -87,8 +87,23 @@ describe('Product component', () => {
             }
         );
         expect(loadCartData).toHaveBeenCalled();
+        const quantitySelector = screen.getByTestId("selector-container");
+        expect(quantitySelector).toHaveValue('1');
 
+        await user.selectOptions(quantitySelector, '3');
+        
+        expect(quantitySelector).toHaveValue('3');
 
-
+        addToCartButton = screen.getByTestId('add-to-cart-button');
+        await user.click(addToCartButton);
+        expect(axios.post).toHaveBeenCalledWith(
+            '/api/cart-items',
+            {
+                productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+                quantity: 3
+            }
+        );
+        expect(loadCartData).toHaveBeenCalledTimes(2);
     })
+
 });

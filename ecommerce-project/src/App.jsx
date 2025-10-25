@@ -11,9 +11,7 @@ import './App.css'
 window.axios=axios;
 
 function App() {
-  
   const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([]);
   //  const [orders, setOrders] = useState([]);
   // useEffect(()=>{
   // axios.get('/api/orders?expand=products')
@@ -37,9 +35,6 @@ function App() {
         element={
         <HomePage
         cart={cart}
-        setCart={setCart}
-        products={products}
-        setProducts={setProducts}
         loadCartData={loadCartData}
        
          />
@@ -49,11 +44,8 @@ function App() {
        path='checkout'
        element={<Checkout 
        cart={cart}
-       setCart={setCart}
-       products={products}
        loadCartData={loadCartData}
-       
-        />}
+       />}
       />
       <Route 
        path='orders'
@@ -61,8 +53,6 @@ function App() {
        <Orders
          cart={cart}
          loadCartData={loadCartData}
-        
-         
          />}
       />
       <Route 

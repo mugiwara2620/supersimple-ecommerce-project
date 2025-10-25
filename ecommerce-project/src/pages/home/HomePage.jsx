@@ -4,9 +4,10 @@ import { useSearchParams } from 'react-router';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { Header } from '../../components/Header.jsx'
+import {useState} from 'react';
 
-
-export function HomePage({ cart, loadCartData,setProducts,products }) {
+export function HomePage({ cart, loadCartData}) {
+	const [products, setProducts] = useState([]);
 
 	const [searchParams] = useSearchParams();
     const search = searchParams.get('search');
